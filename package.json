@@ -4,21 +4,23 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "webpack --bail && electron ./dist/main.js"
+    "build:js": "babel -d dist/ src/",
+    "build:html": "cpy src/index.html dist/",
+    "build": "yarn build:js && yarn build:html",
+    "start": "yarn build && electron ./dist/main.js",
+    "clean": "rimraf dist"
   },
   "dependencies": {
     "electron": "1.6.2",
-    "ionize": "^0.1.1",
     "react": "16.0.0-alpha.5",
     "react-dom": "16.0.0-alpha.5",
-    "react-ionize": "1.2.0"
+    "react-ionize": "^1.3.0"
   },
   "devDependencies": {
-    "babel-core": "^6.24.0",
-    "babel-loader": "^6.4.1",
+    "babel-cli": "^6.24.0",
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-react": "^6.23.0",
-    "file-loader": "^0.11.1",
-    "webpack": "^2.3.2"
+    "cpy-cli": "^1.0.1",
+    "rimraf": "^2.6.1"
   }
 }

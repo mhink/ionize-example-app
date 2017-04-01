@@ -2,8 +2,7 @@ import React from 'react';
 import Ionize from 'react-ionize';
 import { BrowserWindow } from 'electron';
 import { map, range } from 'lodash';
-
-import 'index.html';
+import path from 'path';
 
 Ionize.start(
   <app>
@@ -39,7 +38,7 @@ Ionize.start(
       </menu>
     </menu>
     <window show
-      file="index.html"
+      file={path.resolve(__dirname, 'index.html')}
       position={[120, 120]}
       size={[300, 300]}
     />

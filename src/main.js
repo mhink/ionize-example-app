@@ -4,44 +4,77 @@ import { BrowserWindow } from 'electron';
 import { map, range } from 'lodash';
 import path from 'path';
 
+const SIZES = [
+  [ 200, 200],
+  [ 300, 300],
+  [ 400, 400],
+  [ 300, 300],
+];
+
+const POSITIONS = [
+  [ 120, 120],
+  [ 120, 200],
+  [ 200, 200],
+  [ 200, 120],
+].map(([x,y]) => [x-1280, y+464]);
+
+const ITEMS = [
+  'ONE',
+  'TWO',
+  'THREE',
+  'FOUR',
+];
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      i: 0,
+      show: false,
+    };
+  }
+
+  componentDidMount() {
+    const { i } = this.state;
+    setTimeout(() => this.setState({ i: (i+1) % 4 }), 1000)
+  }
+
+  componentDidUpdate() {
+    const { i } = this.state;
+    setTimeout(() => this.setState({ i: (i+1) % 4 }), 1000)
+  }
+
+  render() {
+    const { i } = this.state;
+    return <app>
+      <menu>
+        <menu label="Electron">
+          <about />
+          <sep />
+          <hide />
+          <hideothers />
+          <unhide />
+          <sep />
+          <quit />
+        </menu>
+        <menu label="Custom Menu">
+          {map(range(i+1), n => (
+            <item key={ITEMS[n]} label={ITEMS[n]} />
+          ))}
+        </menu>
+      </menu>
+      <window
+        show={this.state.show}
+        onReadyToShow={() => this.setState({ show: true })}
+        file={path.resolve(__dirname, 'index.html')}
+        position={POSITIONS[i]}
+        size={SIZES[i]}
+      />
+    </app>
+  }
+}
+
 Ionize.start(
-  <app>
-    <menu>
-      <menu label="Electron">
-        <about />
-        <sep />
-        <hide />
-        <hideothers />
-        <unhide />
-        <sep />
-        <quit />
-      </menu>
-      <menu label="Edit">
-        <undo />
-        <redo />
-        <sep />
-        <cut />
-        <copy />
-        <paste />
-        <selectall />
-      </menu>
-      <menu label="View">
-        <reload />
-        <forcereload />
-        <toggledevtools />
-        <sep />
-        <resetzoom />
-        <zoomin />
-        <zoomout />
-        <sep />
-        <togglefullscreen />
-      </menu>
-    </menu>
-    <window show
-      file={path.resolve(__dirname, 'index.html')}
-      position={[120, 120]}
-      size={[300, 300]}
-    />
-  </app>,
+  <App />,
   () => console.log("Finished Ionize.start()")
 );

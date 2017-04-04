@@ -16,7 +16,7 @@ const POSITIONS = [
   [ 120, 200],
   [ 200, 200],
   [ 200, 120],
-].map(([x,y]) => [x-1280, y+464]);
+];
 
 const ITEMS = [
   'ONE',
@@ -48,7 +48,7 @@ class App extends React.Component {
     const { i } = this.state;
     return <app>
       <menu>
-        <menu label="Electron">
+        <submenu label="Electron">
           <about />
           <sep />
           <hide />
@@ -56,12 +56,12 @@ class App extends React.Component {
           <unhide />
           <sep />
           <quit />
-        </menu>
-        <menu label="Custom Menu">
+        </submenu>
+        <submenu label="Custom Menu">
           {map(range(i+1), n => (
             <item key={ITEMS[n]} label={ITEMS[n]} />
           ))}
-        </menu>
+        </submenu>
       </menu>
       <window
         show={this.state.show}

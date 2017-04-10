@@ -1704,9 +1704,9 @@ react-dom@16.0.0-alpha.5:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
-react-ionize@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/react-ionize/-/react-ionize-1.4.0.tgz#16f0f2cca239d8c01c46d81d676c71e60c84c11d"
+react-ionize@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/react-ionize/-/react-ionize-1.5.0.tgz#a47557e29e55cd4460224e60b4097fc15818e84e"
   dependencies:
     electron "^1.6.2"
     react-dom "16.0.0-alpha.5"
